@@ -1,0 +1,6 @@
+println("Hello World!")
+println("This is Julia programming language.")
+println("Let's write some code in Julia!")
+println("This is a simple script to demonstrate Julia syntax.")
+println("You can run this script using the Julia REPL or save it as a .jl file and execute it.")
+println("Enjoy coding in Julia!")
