@@ -1,11 +1,9 @@
-# Welcome to your Jupyter Book
+# Hello Julia
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+I stumbled upon Julia recently — a high-performance language designed for scientific computing, offering the speed of C with the readability of Python. That makes it especially promising for AI, machine learning, and quantitative finance, where both speed and clarity matter.
 
-Check out the content pages bundled with this sample book to see more.
+This book is my learning log: a hands-on journey through Julia syntax, data handling, and its ecosystem. I’ll be experimenting with financial modelling — from pricing tools to risk simulations — to see how Julia fits into my workflow as someone who trades options and builds research automation in Python. Hopefully, I’ll end up with fewer headaches and faster code.
 
-```{tableofcontents}
-```
+Leeet’s go! 
+
+
