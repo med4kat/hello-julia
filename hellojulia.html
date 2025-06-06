@@ -372,6 +372,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#printing">Printing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenting">Commenting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings">Strings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-interpolation">String Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-concatenation">String Concatenation</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -494,6 +499,106 @@ document.write(`
 </div>
 </div>
 </section>
+<section id="strings">
+<h2>Strings<a class="headerlink" href="#strings" title="Link to this heading">#</a></h2>
+<p>You can use either double quotes “ or triple double quotes “”” to create strings in Julia.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Julia&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;Julia&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">This is a</span>
+<span class="s">multi-line string.</span>
+<span class="s">Very tidy.</span>
+<span class="s">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;This is a\nmulti-line string.\nVery tidy.\n&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that you can include newlines, indentation, and it keeps formatting exactly as written.</p>
+<section id="string-interpolation">
+<h3>String Interpolation<a class="headerlink" href="#string-interpolation" title="Link to this heading">#</a></h3>
+<p>In Julia, you can insert variables directly into strings using the <code class="docutils literal notranslate"><span class="pre">$</span></code> symbol. This is called <strong>string interpolation</strong>, and it’s both clean and powerful.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Julia&quot;</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello, </span><span class="si">$</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="s">!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Julia!
+</pre></div>
+</div>
+</div>
+</div>
+<p>Interpolate expressions with $(…). Note string interpolation only works with double quotes (“), not single quotes (’) or triple-quoted raw””” strings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">birth_year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2012</span>
+<span class="n">current_year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2025</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Julia was born in </span><span class="si">$birth_year</span><span class="s"> and is now </span><span class="si">$</span><span class="p">(</span><span class="n">current_year</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">birth_year</span><span class="p">)</span><span class="s"> years old.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Julia was born in 2012 and is now 13 years old.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Julia’s first public release was on <strong>14 February 2012</strong> — Valentine’s Day!
+A lovely date to fall in love with a language designed for speed and beauty.</p>
+</section>
+<section id="string-concatenation">
+<h3>String Concatenation<a class="headerlink" href="#string-concatenation" title="Link to this heading">#</a></h3>
+<p>In Julia, you combine (or <em>concatenate</em>) strings using the * operator — yes, the same one used for multiplication.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2012&quot;</span>
+<span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Julia was first released in &quot;</span>
+<span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">year</span>
+<span class="n">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Julia was first released in 2012
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mixing strings and numbers? Convert first!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;Version: &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">string</span><span class="p">(</span><span class="n">version</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Version: 1.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -554,6 +659,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#printing">Printing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenting">Commenting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings">Strings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-interpolation">String Interpolation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-concatenation">String Concatenation</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
