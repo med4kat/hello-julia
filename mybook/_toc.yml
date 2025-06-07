@@ -5,4 +5,6 @@ format: jb-book
 root: intro
 chapters:
 - file: hellojulia
+- file: data_structures
+
 
