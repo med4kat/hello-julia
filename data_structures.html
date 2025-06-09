@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Basics &#8212; Hello Julia</title>
+    <title>Data Stuctures &#8212; Hello Julia</title>
   
   
   
@@ -57,11 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'hellojulia';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'data_structures';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Stuctures" href="data_structures.html" />
-    <link rel="prev" title="Hello Julia" href="intro.html" />
+    <link rel="prev" title="Basics" href="hellojulia.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,8 +173,8 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data_structures.html">Data Stuctures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hellojulia.html">Basics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Data Stuctures</a></li>
 </ul>
 
     </div>
@@ -247,7 +246,7 @@
       
       
       
-      <li><a href="https://github.com/med4kat/hello-julia/issues/new?title=Issue%20on%20page%20%2Fhellojulia.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/med4kat/hello-julia/issues/new?title=Issue%20on%20page%20%2Fdata_structures.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -277,7 +276,7 @@
       
       
       
-      <li><a href="_sources/hellojulia.ipynb" target="_blank"
+      <li><a href="_sources/data_structures.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -361,7 +360,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Basics</h1>
+    <h1>Data Stuctures</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -371,14 +370,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#printing">Printing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenting">Commenting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings">Strings</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-interpolation">String Interpolation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-concatenation">String Concatenation</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-vectors">Arrays (Vectors)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples">Tuples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionary">Dictionary</a></li>
 </ul>
             </nav>
         </div>
@@ -390,216 +384,208 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="basics">
-<h1>Basics<a class="headerlink" href="#basics" title="Link to this heading">#</a></h1>
-<section id="printing">
-<h2>Printing<a class="headerlink" href="#printing" title="Link to this heading">#</a></h2>
-<p>We can print, or we can println — the second one politely moves things to the next line.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-stuctures">
+<h1>Data Stuctures<a class="headerlink" href="#data-stuctures" title="Link to this heading">#</a></h1>
+<p>Julia gives you familiar, flexible containers for storing and manipulating data. Let’s look at a few basics.</p>
+<section id="arrays-vectors">
+<h2>Arrays (Vectors)<a class="headerlink" href="#arrays-vectors" title="Link to this heading">#</a></h2>
+<p>Arrays are ordered, mutable lists of values accessed by index. Arrays are like lists in Python. Use square brackets to create them:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Hello &quot;</span><span class="p">)</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;World!&quot;</span><span class="p">)</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;This is Julia programming language.&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">strikes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">90</span><span class="p">,</span><span class="w"> </span><span class="mi">95</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">105</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="p">]</span>
+<span class="n">println</span><span class="p">(</span><span class="n">strikes</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello World!
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[90, 95, 100, 105, 110]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is Julia programming language.
+</div>
+</div>
+<p>Arrays start at 1, not 0:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">println</span><span class="p">(</span><span class="n">strikes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">print</span><span class="p">(</span><span class="n">strikes</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>90
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>110
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="commenting">
-<h2>Commenting<a class="headerlink" href="#commenting" title="Link to this heading">#</a></h2>
-<p>Comments help explain what’s going on in your code — both for your future self and anyone else reading it.</p>
-<p>In Julia, we use # for single-line comments:</p>
+<section id="tuples">
+<h2>Tuples<a class="headerlink" href="#tuples" title="Link to this heading">#</a></h2>
+<p>Tuples are fixed-size, ordered collections that can be either unnamed or named. Named tuples work like lightweight records. Here is labeled tuple ( great for representing an option):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># This is a comment</span>
-<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="w">  </span><span class="c"># You can also comment at the end of a line</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="o">=</span><span class="s">&quot;call&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">strike</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">expiry</span><span class="o">=</span><span class="s">&quot;2025-06-30&quot;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;Here is you tuple: </span><span class="si">$option</span><span class="s">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Here is you tuple: (type = &quot;call&quot;, strike = 100, expiry = &quot;2025-06-30&quot;)
 </pre></div>
 </div>
 </div>
 </div>
-<p>For multi-line or block comments, use #= and =#:</p>
+<p>Access fields like this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="cm">#=</span>
-<span class="cm">This is a</span>
-<span class="cm">multi-line comment.</span>
-<span class="cm">Very chill.</span>
-<span class="cm">=#</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Comment often. Your brain will thank you later.</p>
-</section>
-<section id="variables">
-<h2>Variables<a class="headerlink" href="#variables" title="Link to this heading">#</a></h2>
-<p>You assign variables in Julia just like in most other languages:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">strike</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100
 </pre></div>
 </div>
 </div>
 </div>
-<p>Variables can be reassigned — Julia is dynamically typed:</p>
+<p>Or access by index (starting at 1, not 0):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;now I’m a string&quot;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="n">option</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;now I’m a string&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100
 </pre></div>
 </div>
 </div>
 </div>
-<p>To check what type a variable has, use typeof():</p>
+<p>Tuples are immutable, we can’t update it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">typeof</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">option</span><span class="o">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;put&quot;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>String
-</pre></div>
-</div>
-</div>
-</div>
-<p>You can use variables in expressions:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
-<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">10</span>
-<span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>true
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">setfield</span><span class="o">!</span>:<span class="w"> </span>immutable<span class="w"> </span>struct<span class="w"> </span>of<span class="w"> </span><span class="nb">type</span><span class="w"> </span>NamedTuple<span class="w"> </span>cannot<span class="w"> </span>be<span class="w"> </span>changed
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">setproperty</span><span class="o">!(</span>x::@NamedTuple<span class="o">{</span>type::String,<span class="w"> </span>strike::Int64,<span class="w"> </span>expiry::String<span class="o">}</span>,<span class="w"> </span>f::Symbol,<span class="w"> </span>v::String<span class="o">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">Base</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">53</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="strings">
-<h2>Strings<a class="headerlink" href="#strings" title="Link to this heading">#</a></h2>
-<p>You can use either double quotes “ or triple double quotes “”” to create strings in Julia.</p>
+<section id="dictionary">
+<h2>Dictionary<a class="headerlink" href="#dictionary" title="Link to this heading">#</a></h2>
+<p>When we have pairs of related data — like names and descriptions — a dictionary is a good way to store them. In Julia, we can create a dictionary using the Dict() function. It can be empty or filled with key-value pairs right from the start.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Julia&quot;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">empty_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Dict</span><span class="p">()</span>
+<span class="n">key_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Dict</span><span class="p">(</span><span class="s">&quot;key1&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;value1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;key2&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;value2&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;Julia&quot;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{String, String} with 2 entries:
+  &quot;key2&quot; =&gt; &quot;value2&quot;
+  &quot;key1&quot; =&gt; &quot;value1&quot;
 </pre></div>
 </div>
 </div>
 </div>
+<p>Let’s rename empty_dict to something more meaningful. For example, we can use strategies to store the names and descriptions of common option strategies.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
-<span class="s">This is a</span>
-<span class="s">multi-line string.</span>
-<span class="s">Very tidy.</span>
-<span class="s">&quot;&quot;&quot;</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">strategies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Dict</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;This is a\nmulti-line string.\nVery tidy.\n&quot;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{Any, Any}()
 </pre></div>
 </div>
 </div>
 </div>
-<p>Notice that you can include newlines, indentation, and it keeps formatting exactly as written.</p>
-<section id="string-interpolation">
-<h3>String Interpolation<a class="headerlink" href="#string-interpolation" title="Link to this heading">#</a></h3>
-<p>In Julia, you can insert variables directly into strings using the <code class="docutils literal notranslate"><span class="pre">$</span></code> symbol. This is called <strong>string interpolation</strong>, and it’s both clean and powerful.</p>
+<p>Now let’s add a few entries:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Julia&quot;</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello, </span><span class="si">$</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="s">!&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">strategies</span><span class="p">[</span><span class="s">&quot;bull_call_spread&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Buy call at lower strike, sell call at higher strike&quot;</span>
+<span class="n">strategies</span><span class="p">[</span><span class="s">&quot;straddle&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Buy call and put at the same strike&quot;</span>
+<span class="n">strategies</span><span class="p">[</span><span class="s">&quot;iron_condor&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sell out-of-the-money call and put, buy further OTM call and put for protection&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can print the whole dictionary:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="n">strategies</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Julia!
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{Any, Any}(&quot;bull_call_spread&quot; =&gt; &quot;Buy call at lower strike, sell call at higher strike&quot;, &quot;iron_condor&quot; =&gt; &quot;Sell out-of-the-money call and put, buy further OTM call and put for protection&quot;, &quot;straddle&quot; =&gt; &quot;Buy call and put at the same strike&quot;)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Interpolate expressions with $(…). Note string interpolation only works with double quotes (“), not single quotes (’) or triple-quoted raw””” strings.</p>
+<p>Or look up one strategy by name:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">birth_year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2012</span>
-<span class="n">current_year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2025</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;Julia was born in </span><span class="si">$birth_year</span><span class="s"> and is now </span><span class="si">$</span><span class="p">(</span><span class="n">current_year</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">birth_year</span><span class="p">)</span><span class="s"> years old.&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="n">strategies</span><span class="p">[</span><span class="s">&quot;straddle&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Julia was born in 2012 and is now 13 years old.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Buy call and put at the same strike
 </pre></div>
 </div>
 </div>
 </div>
-<p>Julia’s first public release was on <strong>14 February 2012</strong> — Valentine’s Day!
-A lovely date to fall in love with a language designed for speed and beauty.</p>
-</section>
-<section id="string-concatenation">
-<h3>String Concatenation<a class="headerlink" href="#string-concatenation" title="Link to this heading">#</a></h3>
-<p>In Julia, you combine (or <em>concatenate</em>) strings using the * operator — yes, the same one used for multiplication.</p>
+<p>If you want to remove a key and its value from a dictionary, use the pop! function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;2012&quot;</span>
-<span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Julia was first released in &quot;</span>
-<span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">year</span>
-<span class="n">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pop!</span><span class="p">(</span><span class="n">strategies</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;straddle&quot;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="n">strategies</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Julia was first released in 2012
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{Any, Any}(&quot;bull_call_spread&quot; =&gt; &quot;Buy call at lower strike, sell call at higher strike&quot;, &quot;iron_condor&quot; =&gt; &quot;Sell out-of-the-money call and put, buy further OTM call and put for protection&quot;)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Mixing strings and numbers? Convert first!</p>
+<p>Unlike arrays or tuples, dictionaries have no guaranteed order. That means:
+•	You can’t access values by index like dict[1]
+•	The order of keys and values might change when you print or loop through them</p>
+<p>If we try to access values by index <code class="docutils literal notranslate"><span class="pre">julia</span></code> thinks you’re trying to access a value associated with the key <code class="docutils literal notranslate"><span class="pre">1</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
-<span class="n">print</span><span class="p">(</span><span class="s">&quot;Version: &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">string</span><span class="p">(</span><span class="n">version</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">strategies</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Version: 1.0
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">KeyError</span>: key 1 not found
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">getindex</span><span class="p">(</span><span class="n">h</span><span class="p">::</span><span class="n">Dict</span><span class="p">{</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">},</span> <span class="n">key</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="nb">dict</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">477</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">28</span><span class="p">]:</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
 </section>
 </section>
 
@@ -634,22 +620,13 @@ A lovely date to fall in love with a language designed for speed and beauty.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="hellojulia.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Hello Julia</p>
+        <p class="prev-next-title">Basics</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="data_structures.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Stuctures</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -667,14 +644,9 @@ A lovely date to fall in love with a language designed for speed and beauty.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#printing">Printing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commenting">Commenting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings">Strings</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-interpolation">String Interpolation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#string-concatenation">String Concatenation</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-vectors">Arrays (Vectors)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples">Tuples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionary">Dictionary</a></li>
 </ul>
   </nav></div>
 
