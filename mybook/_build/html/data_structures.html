@@ -372,6 +372,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-vectors">Arrays (Vectors)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples">Tuples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionary">Dictionary</a></li>
 </ul>
             </nav>
         </div>
@@ -482,6 +483,110 @@ document.write(`
 </div>
 </div>
 </section>
+<section id="dictionary">
+<h2>Dictionary<a class="headerlink" href="#dictionary" title="Link to this heading">#</a></h2>
+<p>When we have pairs of related data — like names and descriptions — a dictionary is a good way to store them. In Julia, we can create a dictionary using the Dict() function. It can be empty or filled with key-value pairs right from the start.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">empty_dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Dict</span><span class="p">()</span>
+<span class="n">key_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Dict</span><span class="p">(</span><span class="s">&quot;key1&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;value1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;key2&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;value2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{String, String} with 2 entries:
+  &quot;key2&quot; =&gt; &quot;value2&quot;
+  &quot;key1&quot; =&gt; &quot;value1&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s rename empty_dict to something more meaningful. For example, we can use strategies to store the names and descriptions of common option strategies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">strategies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Dict</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{Any, Any}()
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s add a few entries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">strategies</span><span class="p">[</span><span class="s">&quot;bull_call_spread&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Buy call at lower strike, sell call at higher strike&quot;</span>
+<span class="n">strategies</span><span class="p">[</span><span class="s">&quot;straddle&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Buy call and put at the same strike&quot;</span>
+<span class="n">strategies</span><span class="p">[</span><span class="s">&quot;iron_condor&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sell out-of-the-money call and put, buy further OTM call and put for protection&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can print the whole dictionary:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="n">strategies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{Any, Any}(&quot;bull_call_spread&quot; =&gt; &quot;Buy call at lower strike, sell call at higher strike&quot;, &quot;iron_condor&quot; =&gt; &quot;Sell out-of-the-money call and put, buy further OTM call and put for protection&quot;, &quot;straddle&quot; =&gt; &quot;Buy call and put at the same strike&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or look up one strategy by name:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="n">strategies</span><span class="p">[</span><span class="s">&quot;straddle&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Buy call and put at the same strike
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want to remove a key and its value from a dictionary, use the pop! function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">pop!</span><span class="p">(</span><span class="n">strategies</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;straddle&quot;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="n">strategies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dict{Any, Any}(&quot;bull_call_spread&quot; =&gt; &quot;Buy call at lower strike, sell call at higher strike&quot;, &quot;iron_condor&quot; =&gt; &quot;Sell out-of-the-money call and put, buy further OTM call and put for protection&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Unlike arrays or tuples, dictionaries have no guaranteed order. That means:
+•	You can’t access values by index like dict[1]
+•	The order of keys and values might change when you print or loop through them</p>
+<p>If we try to access values by index <code class="docutils literal notranslate"><span class="pre">julia</span></code> thinks you’re trying to access a value associated with the key <code class="docutils literal notranslate"><span class="pre">1</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">strategies</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">KeyError</span>: key 1 not found
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">getindex</span><span class="p">(</span><span class="n">h</span><span class="p">::</span><span class="n">Dict</span><span class="p">{</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">},</span> <span class="n">key</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="nb">dict</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">477</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">28</span><span class="p">]:</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -541,6 +646,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-vectors">Arrays (Vectors)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples">Tuples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionary">Dictionary</a></li>
 </ul>
   </nav></div>
 
