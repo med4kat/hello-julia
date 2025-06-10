@@ -348,7 +348,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -364,6 +366,17 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loop">While loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-monte-carlo-simulation">Mini Monte Carlo Simulation</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -375,6 +388,77 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="loops">
 <h1>Loops<a class="headerlink" href="#loops" title="Link to this heading">#</a></h1>
+<section id="while-loop">
+<h2>While loop<a class="headerlink" href="#while-loop" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">while</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="mi">5</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">end</span><span class="w">    </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+3
+4
+5
+</pre></div>
+</div>
+</div>
+</div>
+<section id="mini-monte-carlo-simulation">
+<h3>Mini Monte Carlo Simulation<a class="headerlink" href="#mini-monte-carlo-simulation" title="Link to this heading">#</a></h3>
+<p>Monte Carlo methods are used to estimate the value of things when we can’t (or don’t want to) calculate an exact answer. In finance, this often means simulating option payoffs under random market conditions.</p>
+<p>Let’s try a <strong>mini Monte Carlo simulation</strong> to estimate the value of a European call option — using simple assumptions.</p>
+<p><strong>Goal</strong></p>
+<p>Estimate the expected payoff of a call option with:</p>
+<ul class="simple">
+<li><p>Strike price <em>K = 100</em></p></li>
+<li><p>Spot price is simulated as a <strong>normal distribution</strong> around 100</p></li>
+<li><p>Payoff is: <em>max(S - K, 0)</em></p></li>
+</ul>
+<p>We’ll keep adding samples until the estimate stops changing much.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">strike</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="n">estimated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">last_estimate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span>
+<span class="n">tolerance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01</span>
+
+<span class="k">while</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">estimated</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">last_estimate</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">tolerance</span>
+<span class="w">    </span><span class="n">last_estimate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">estimated</span>
+
+<span class="w">    </span><span class="c"># Simulate spot price (simplified: normally distributed)</span>
+<span class="w">    </span><span class="n">spot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">100</span>
+
+<span class="w">    </span><span class="c"># Payoff of a European call</span>
+<span class="w">    </span><span class="n">payoff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">spot</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">strike</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c"># Update average payoff</span>
+<span class="w">    </span><span class="n">estimated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">estimated</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">payoff</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">samples</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">samples</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">end</span>
+
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Estimated option value: </span><span class="si">$estimated</span><span class="s"> after </span><span class="si">$samples</span><span class="s"> simulations&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated option value: 4.9651757488034045 after 25 simulations
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is a simplified example — in reality, you’d model stock prices using <strong>log-normal distributions</strong> (e.g. geometric Brownian motion) and discount payoffs to present value. But the idea of <strong>convergence using while</strong> remains the same.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -386,16 +470,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "julia-1.11"
         },
         kernelOptions: {
-            name: "python3",
+            name: "julia-1.11",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'julia-1.11'</script>
 
                 </article>
               
@@ -422,6 +506,24 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loop">While loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-monte-carlo-simulation">Mini Monte Carlo Simulation</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
