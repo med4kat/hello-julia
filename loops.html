@@ -372,7 +372,11 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loop">While loop</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-monte-carlo-simulation">Mini Monte Carlo Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-monte-carlo-simulation-with-while-loop">Mini Monte Carlo Simulation with WHILE loop</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop">For loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-monte-carlo-simulation-with-for-loop">Mini Monte Carlo Simulation with FOR loop</a></li>
 </ul>
 </li>
 </ul>
@@ -412,8 +416,8 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="mini-monte-carlo-simulation">
-<h3>Mini Monte Carlo Simulation<a class="headerlink" href="#mini-monte-carlo-simulation" title="Link to this heading">#</a></h3>
+<section id="mini-monte-carlo-simulation-with-while-loop">
+<h3>Mini Monte Carlo Simulation with WHILE loop<a class="headerlink" href="#mini-monte-carlo-simulation-with-while-loop" title="Link to this heading">#</a></h3>
 <p>Monte Carlo methods are used to estimate the value of things when we can’t (or don’t want to) calculate an exact answer. In finance, this often means simulating option payoffs under random market conditions.</p>
 <p>Let’s try a <strong>mini Monte Carlo simulation</strong> to estimate the value of a European call option — using simple assumptions.</p>
 <p><strong>Goal</strong></p>
@@ -451,12 +455,62 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated option value: 4.9651757488034045 after 25 simulations
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated option value: 2.8692566157095665 after 19 simulations
 </pre></div>
 </div>
 </div>
 </div>
 <p>This is a simplified example — in reality, you’d model stock prices using <strong>log-normal distributions</strong> (e.g. geometric Brownian motion) and discount payoffs to present value. But the idea of <strong>convergence using while</strong> remains the same.</p>
+</section>
+</section>
+<section id="for-loop">
+<h2>For loop<a class="headerlink" href="#for-loop" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+4
+5
+</pre></div>
+</div>
+</div>
+</div>
+<section id="mini-monte-carlo-simulation-with-for-loop">
+<h3>Mini Monte Carlo Simulation with FOR loop<a class="headerlink" href="#mini-monte-carlo-simulation-with-for-loop" title="Link to this heading">#</a></h3>
+<p>Let’s take the same simplified model as before, but this time we’ll use a for loop.</p>
+<p>We use a for loop when we know how many simulations we want to run. Unlike the while loop — which runs until the result stops changing — the for loop runs a fixed number of times.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">strike</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="n">total_payoff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="n">n_simulations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10_000</span>
+
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n_simulations</span>
+<span class="w">    </span><span class="n">spot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">    </span><span class="n">payoff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">spot</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">strike</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="n">total_payoff</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">payoff</span>
+<span class="w">    </span>
+<span class="k">end</span>
+
+<span class="n">estimated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">total_payoff</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_simulations</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;Estimated option value: </span><span class="si">$estimated</span><span class="s"> from </span><span class="si">$n_simulations</span><span class="s"> simulations&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated option value: 4.006243557028999 from 10000 simulations
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
@@ -517,7 +571,11 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loop">While loop</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-monte-carlo-simulation">Mini Monte Carlo Simulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-monte-carlo-simulation-with-while-loop">Mini Monte Carlo Simulation with WHILE loop</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop">For loop</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-monte-carlo-simulation-with-for-loop">Mini Monte Carlo Simulation with FOR loop</a></li>
 </ul>
 </li>
 </ul>
