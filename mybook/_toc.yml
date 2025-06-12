@@ -7,5 +7,7 @@ chapters:
 - file: hellojulia
 - file: data_structures
 - file: loops
+- file: conditionals
+
 
 
