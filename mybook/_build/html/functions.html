@@ -178,6 +178,7 @@
 <li class="toctree-l1"><a class="reference internal" href="loops.html">Loops</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conditionals.html">Conditionals</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Functions</a></li>
+
 </ul>
 
     </div>
@@ -373,6 +374,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Functions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-line-function-definition">Multi-line function definition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-line-function-short-form">Single-line function (short form)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mutating-vs-non-mutating-functions">Mutating vs. non-mutating functions</a><ul class="nav section-nav flex-column">
@@ -380,6 +382,13 @@ document.write(`
 </ul>
 </li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#high-order-function-broadcast">High-order function <code class="docutils literal notranslate"><span class="pre">broadcast</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-example">Matrix Example</a></li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -486,6 +495,49 @@ The original nums is unchanged.</p>
 </section>
 </section>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="high-order-function-broadcast">
+<h1>High-order function <code class="docutils literal notranslate"><span class="pre">broadcast</span></code><a class="headerlink" href="#high-order-function-broadcast" title="Link to this heading">#</a></h1>
+<p>One of the features I find most elegant in Julia is <strong>broadcasting</strong> — the ability to apply a function to each element of an array or matrix using just a <code class="docutils literal notranslate"><span class="pre">.</span></code>.
+It makes code look clean, expressive, and almost mathematical.</p>
+<section id="matrix-example">
+<h2>Matrix Example<a class="headerlink" href="#matrix-example" title="Link to this heading">#</a></h2>
+<p>Let’s start by creating a simple 3×3 matrix:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Int64}:
+ 2  3  4
+ 4  5  6
+ 6  7  8
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s apply a function — like squaring each element — using broadcasting:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A_sqred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">.^</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Int64}:
+  4   9  16
+ 16  25  36
+ 36  49  64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, the dot before ^ tells Julia:
+<strong>“Apply ^2 to every element of A.”</strong>
+No loops — just math-like elegance.</p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -542,6 +594,7 @@ The original nums is unchanged.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Functions</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-line-function-definition">Multi-line function definition</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-line-function-short-form">Single-line function (short form)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mutating-vs-non-mutating-functions">Mutating vs. non-mutating functions</a><ul class="nav section-nav flex-column">
@@ -549,6 +602,13 @@ The original nums is unchanged.</p>
 </ul>
 </li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#high-order-function-broadcast">High-order function <code class="docutils literal notranslate"><span class="pre">broadcast</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-example">Matrix Example</a></li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
